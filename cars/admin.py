@@ -16,3 +16,4 @@ class Car_Admin(admin.ModelAdmin):
 
 admin.site.register(Brand,Brand_Admin)
 admin.site.register(Car,Car_Admin)
+

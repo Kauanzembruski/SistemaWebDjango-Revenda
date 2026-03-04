@@ -2,143 +2,159 @@
 
 {% block content %}
 <style>
+  body {
+    background: linear-gradient(135deg, #0f172a, #0b1e26);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  /* REMOVE QUALQUER ESTILO DE LINK */
+  a {
+    text-decoration: none !important;
+    color: inherit !important;
+  }
+
   .car-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 30px;
-    max-width: 1200px;
-    margin: 40px auto;
-    padding: 0 20px;
+    gap: 35px;
+    max-width: 1300px;
+    margin: 50px auto;
+    padding: 0 25px;
   }
 
   .car-card {
-    background: #1b2a33;
-    border-radius: 18px;
+    background: linear-gradient(145deg, #1b2a33, #142029);
+    border-radius: 20px;
     overflow: hidden;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
     transition: all 0.4s ease;
     position: relative;
+    cursor: pointer;
   }
 
   .car-card:hover {
-    transform: translateY(-8px) scale(1.02);
-    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.7);
+    transform: translateY(-10px) scale(1.03);
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8);
   }
 
   .car-card img {
     width: 100%;
-    height: 220px;
+    height: 230px;
     object-fit: cover;
     transition: 0.4s ease;
   }
 
   .car-card:hover img {
-    transform: scale(1.05);
+    transform: scale(1.08);
   }
 
   .car-card h2 {
-    font-size: 1.3rem;
-    margin: 15px 15px 5px;
+    font-size: 1.4rem;
+    margin: 18px 18px 8px;
     color: #ffffff;
     font-weight: 600;
   }
 
   .car-card p {
-    font-size: 1rem;
-    margin: 0 15px 20px;
-    color: #90e0ef;
-    font-weight: 500;
-  }
-
-  /* Badge de ano */
-  .car-card::after {
-    content: "Disponível";
-    position: absolute;
-    top: 15px;
-    left: 15px;
-    background: #00b4d8;
-    color: #000;
-    padding: 5px 12px;
-    font-size: 12px;
-    border-radius: 20px;
+    font-size: 1.1rem;
+    margin: 0 18px 20px;
     font-weight: bold;
+    color: #00e0ff;
   }
 
-  /* FORMULÁRIO DE BUSCA */
+  /* BADGE DISPONÍVEL */
+  .car-card::after {
+    content: "🔥 DISPONÍVEL";
+    position: absolute;
+    top: 18px;
+    left: 18px;
+    background: linear-gradient(45deg, #00b4d8, #00e0ff);
+    color: #000;
+    padding: 6px 14px;
+    font-size: 12px;
+    border-radius: 30px;
+    font-weight: bold;
+    letter-spacing: 1px;
+  }
+
+  /* FORM BUSCA */
   form {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 10px;
-    margin: 30px auto;
-    max-width: 600px;
-    padding: 0 20px;
+    gap: 12px;
+    margin: 40px auto;
+    max-width: 650px;
+    padding: 0 25px;
   }
 
   input[type="text"] {
     flex: 1;
-    padding: 12px 15px;
+    padding: 14px 18px;
     font-size: 15px;
-    border-radius: 10px;
+    border-radius: 12px;
     border: none;
     outline: none;
     background: #1b2a33;
     color: #fff;
-    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5);
+    box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.7);
     transition: 0.3s ease;
   }
 
   input[type="text"]:focus {
-    box-shadow: 0 0 10px #00b4d8;
+    box-shadow: 0 0 15px #00e0ff;
   }
 
   button[type="submit"] {
-    background: #00b4d8;
+    background: linear-gradient(45deg, #00b4d8, #00e0ff);
     color: #000;
     border: none;
-    padding: 12px 22px;
+    padding: 14px 25px;
     font-size: 15px;
-    border-radius: 10px;
+    border-radius: 12px;
     cursor: pointer;
     font-weight: bold;
     transition: 0.3s ease;
   }
 
   button[type="submit"]:hover {
-    background: #90e0ef;
-    transform: scale(1.05);
+    transform: scale(1.08);
   }
 
   .no-results {
     text-align: center;
     grid-column: 1 / -1;
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     color: #ccc;
+    margin-top: 30px;
   }
 
   @media (max-width: 768px) {
     .car-grid {
-      gap: 20px;
+      gap: 25px;
     }
   }
 </style>
 
 <form method="GET" action="{% url 'cars_list' %}">
-  <input type="text" name="search" placeholder="Buscar carro...">
+  <input type="text" name="search" placeholder="🔎 Buscar carro...">
   <button type="submit">Buscar</button>
 </form>
 
 <div class="car-grid">
   {% if cars %}
-  {% for car in cars %}
-  <div class="car-card">
-    <img src="{{ car.photo.url }}" alt="{{ car.model }} - {{ car.brand }}">
-    <h2>{{ car.brand }} {{ car.model }}</h2>
-    <p>{{ car.factory_year }} - R$ {{ car.value }}</p>
-  </div>
-  {% endfor %}
+    {% for car in cars %}
+      <a href="{% url 'car_detail' car.pk %}">
+        <div class="car-card">
+          <img src="{{ car.photo.url }}" alt="{{ car.model }} - {{ car.brand }}">
+          <h2>{{ car.brand }} {{ car.model }}</h2>
+          <p>{{ car.factory_year }} • R$ {{ car.value }}</p>
+        </div>
+      </a>
+    {% endfor %}
   {% else %}
-  <p class="no-results">Nenhum carro encontrado.</p>
+    <p class="no-results">🚗 Nenhum carro encontrado.</p>
   {% endif %}
 </div>
+
 {% endblock %}
