@@ -132,28 +132,119 @@
       font-size: 14px;
       color: #bbb;
     }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      height: 70px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 30px;
+    }
+
+    /* Logo */
+    .logo a {
+      font-size: 22px;
+      font-weight: bold;
+      text-decoration: none;
+      color: #00e0ff;
+      letter-spacing: 1px;
+    }
+
+    /* Links centrais */
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 30px;
+    }
+
+    .nav-links li a {
+      text-decoration: none;
+      color: #fff;
+      font-weight: 500;
+      padding: 8px 15px;
+      border-radius: 8px;
+      transition: 0.3s ease;
+    }
+
+    .nav-links li a:hover {
+      background: #00b4d8;
+      color: #000;
+    }
+
+    /* Área usuário */
+    .nav-user {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .welcome {
+      font-size: 14px;
+      color: #ccc;
+    }
+
+    .btn-nav {
+      padding: 8px 16px;
+      border-radius: 8px;
+      background: #00b4d8;
+      color: #000;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.3s ease;
+    }
+
+    .btn-nav:hover {
+      background: #90e0ef;
+      transform: translateY(-2px);
+    }
+
+    .logout {
+      background: #ff4d4d;
+      color: #fff;
+    }
+
+    .logout:hover {
+      background: #ff1a1a;
+    }
+
+    .register {
+      background: #00e0ff;
+    }
   </style>
 </head>
 
 <body>
   <header>
     <nav>
-      <ul>
-        {% if user.is_authenticated %}
-        <li>Olá, {{ user.username }}</li>
-        <li><a href="{% url 'new_car' %}">Cadastrar Carro</a></li>
-        {% endif %}
+      <div class="nav-container">
 
-        {% if not user.is_authenticated %}
-        <li><a href="{% url 'register' %}">Cadastre-se</a></li>
-        <li><a href="{% url 'login' %}">Login</a></li>
-        {% endif %}
-        <li><a href="{% url 'cars_list' %}">Carros</a></li>
+        <!-- Logo -->
+        <div class="logo">
+          <a href="{% url 'cars_list' %}">🚗 AutoPrime</a>
+        </div>
 
-        {% if user.is_authenticated %}
-        <li><a href="{% url 'logout' %}">Sair</a></li>
-        {% endif %}
-      </ul>
+        <!-- Links centrais -->
+        <ul class="nav-links">
+          <li><a href="{% url 'cars_list' %}">Carros</a></li>
+          {% if user.is_authenticated %}
+          <li><a href="{% url 'new_car' %}">Cadastrar</a></li>
+          {% endif %}
+        </ul>
+
+        <!-- Área do usuário -->
+        <div class="nav-user">
+          {% if user.is_authenticated %}
+          <span class="welcome">Olá, {{ user.username }}</span>
+          <a class="btn-nav logout" href="{% url 'logout' %}">Sair</a>
+          {% else %}
+          <a class="btn-nav" href="{% url 'login' %}">Login</a>
+          <a class="btn-nav register" href="{% url 'register' %}">Cadastre-se</a>
+          {% endif %}
+        </div>
+
+      </div>
     </nav>
   </header>
 

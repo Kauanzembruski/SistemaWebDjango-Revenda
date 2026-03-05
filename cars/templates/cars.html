@@ -1,5 +1,6 @@
 {% extends "base.html"%}
 {% load humanize %}
+{% load static %}
 {% block content %}
 <style>
   body {
@@ -146,7 +147,11 @@
   {% for car in cars %}
   <a href="{% url 'car_detail' car.pk %}">
     <div class="car-card">
+      {% if car.photo %}
       <img src="{{ car.photo.url }}" alt="{{ car.model }} - {{ car.brand }}">
+      {% else %}
+      <img src="{% static 'img/imagemnao.jpg' %}">
+      {% endif %}
       <h2>{{ car.brand }} {{ car.model }}</h2>
       <p>
         {{ car.factory_year }} •

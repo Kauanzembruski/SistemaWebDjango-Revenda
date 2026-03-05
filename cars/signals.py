@@ -1,7 +1,8 @@
-from django.db.models.signals import post_delete,post_save
+from django.db.models.signals import post_delete,post_save, pre_save,pre_delete
 from django.db.models import Sum
 from django.dispatch import receiver
 from cars.models import Car, CarInventory
+from gemini_api.client import get_car_ia_bio
 
 
 
@@ -23,4 +24,10 @@ def car_postsave(sender, instance, **kwargs):
 def car_postsave(sender, instance, **kwargs):
     cars_inventory_update()
     
-    
+@receiver(pre_save,sender=Car)
+def car_presave(sender, instance, **kwargs):
+    if not instance.bio:
+        ai_bio = get_car_ia_bio(
+            instance.model, instance.brand, instance.model_year
+            )
+        instance.bio = ai_bio
