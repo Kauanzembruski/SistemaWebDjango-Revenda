@@ -71,23 +71,23 @@ python manage.py migrate
 
 ---
 
-5️⃣ Criar superusuário (admin)
+## 5️⃣ Criar superusuário (admin)
 
 Para acessar o painel de administração do Django, crie um superusuário:
-
+```bash
 python manage.py createsuperuser
-
+```
 Ele vai pedir:
-
+```bash
 Username:
 Email:
 Password:
 Password again:
-
+```
 Depois você poderá acessar o admin em:
-
+```bash
 http://127.0.0.1:8000/admin
-
+```
 ## 6️⃣ Rodar o servidor
 
 ```bash
