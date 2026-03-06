@@ -1,0 +1,25 @@
+# Byte compiled / cache
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Ambientes virtuais
+venv/
+env/
+
+# Arquivos sensíveis
+.env
+
+# Banco de dados
+db.sqlite3
+
+# Arquivos coletados
+staticfiles/
+
+# Logs
+*.log
+
+# IDEs
+.vscode/
+.idea/
