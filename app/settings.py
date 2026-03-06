@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     'cars',
     'accounts',
     'django.contrib.humanize',
-    'django_superuser',
 ]
 
 MIDDLEWARE = [
