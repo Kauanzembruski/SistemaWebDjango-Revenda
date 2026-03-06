@@ -1,6 +1,7 @@
 from google import genai
+from decouple import config
 
-client = genai.Client(api_key="AIzaSyCSXdJySaIamCd-5jHi6YCzb8hEA4SQtuo")
+client = genai.Client(api_key=config("GEMINI_API_KEY"))
 def get_car_ia_bio(model, brand, year):
     prompt= f"""
           Crie uma descrição de venda para o carro {brand} {model} {year}.
