@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-03shxzz^&k&saf)4hwsly*k&*dbl@%gy=h4!)sbur^#2&08(a7'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['sistemawebdjango-revenda.onrender.com']
 
@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'cars',
     'accounts',
     'django.contrib.humanize',
+    'django_superuser',
 ]
 
 MIDDLEWARE = [
