@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-03shxzz^&k&saf)4hwsly*k&*dbl@%gy=h4!)sbur^#2&08(a7
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['sistemawebdjango-revenda.onrender.com']
 
 
 # Application definition
