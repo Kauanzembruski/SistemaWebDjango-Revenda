@@ -20,8 +20,11 @@ from django.conf import settings
 from django.conf.urls.static import static
 from cars.views import CarsView,NewCarView, CarDetailView, CarUpdateView,CarDeleteView
 from accounts.views import RegisterView,LoginView, LogoutView
+from django.shortcuts import redirect
 
 urlpatterns = [
+    path('', lambda request: redirect('/cars/')),
+    
     path('admin/', admin.site.urls),
     path('cars/', CarsView.as_view() , name='cars_list' ),
     path('new_car/', NewCarView.as_view(), name='new_car'),
